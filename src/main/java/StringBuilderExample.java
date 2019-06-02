@@ -1,13 +1,36 @@
 public class StringBuilderExample {
 
 
+    static StringBuilder stringBuilder = new StringBuilder();
+    static StringBuffer stringBuffer = new StringBuffer();
+
     public static void main(String[] args) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Imie: ");
-        stringBuilder.append("Przemek");
-        stringBuilder.append(System.lineSeparator());
-        stringBuilder.append("Nazwisko: ");
-        stringBuilder.append("Bykowski");
-        System.out.println(stringBuilder.toString());
+
+        long startBuilder = System.currentTimeMillis();
+        for (int i = 0; i < 9999999 ; i++) {
+            stringBuilder.append("Hello");
+        }
+        stringBuilder.toString();
+
+        System.out.println(System.currentTimeMillis() - startBuilder);
+
+        long startBuffer = System.currentTimeMillis();
+        for (int i = 0; i < 9999999 ; i++) {
+            stringBuffer.append("Hello");
+        }
+        stringBuffer.toString();
+        System.out.println(System.currentTimeMillis() - startBuffer);
+
+
+
+
+
+
     }
+
+
+
+
+
+
 }

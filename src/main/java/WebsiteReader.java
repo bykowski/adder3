@@ -10,7 +10,7 @@ public class WebsiteReader {
 
     public static void main(String[] args) throws IOException {
 
-        long start = System.currentTimeMillis();
+               long start = System.currentTimeMillis();
 
         Set<String> setLinks = new HashSet<>(); // unique
 
@@ -35,24 +35,32 @@ public class WebsiteReader {
             setLinks.add(link);
         }
 
-        for (String link : setLinks) {
-            System.out.println(link);
+        for (int i = 0; i < setLinks.size() ; i++) {
+            saveWebsite(i + ".html", setLinks.toArray()[i].toString() );
         }
-
-
-        //
-//        System.out.println(link);
-//        System.out.println(link2);
-
-
-//        BufferedWriter bufferedWriter =
-//                new BufferedWriter(new FileWriter("strona.html"));
-//        bufferedWriter.write(stringBuilder.toString());
-//        bufferedWriter.close();
 
 
         long end = System.currentTimeMillis();
         System.out.println(end - start );
+    }
+
+    public static void saveWebsite(String fileName, String link) throws IOException {
+        URL url = new URL(link);
+        BufferedReader bufferedReader =
+                new BufferedReader(new InputStreamReader(url.openStream()));
+
+        String line;
+        StringBuilder stringBuilder = new StringBuilder();
+        while ((line = bufferedReader.readLine()) != null) {
+            stringBuilder.append(line);
+            stringBuilder.append(System.lineSeparator());
+        }
+
+        BufferedWriter bufferedWriter =
+                new BufferedWriter(new FileWriter(fileName));
+        bufferedWriter.write(stringBuilder.toString());
+        bufferedWriter.close();
 
     }
+
 }
